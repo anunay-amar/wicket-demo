@@ -1,0 +1,24 @@
+<html xmlns:wicket="http://wicket.apache.org">
+<body>
+<h1>Child page</h1>
+
+DON'T get disturbed by this content, it's usually in examples only to confuse you
+(or, to remind you that the child page file will be previewable in browser).
+*** Everything outside "wicket:extend" will be ignored. ***
+<p>Child Page</p>
+
+  <wicket:extend>
+  <h2>News</h2>
+  So this is the real content to be included into the base page.
+
+  Here we have some component container:
+
+  <div wicket:id="news">Works like usual, so this will be replaced by the component's stuff.</div>
+
+  </wicket:extend>
+
+    *** Again, everything outside the wicket:extend is ignored. ***
+
+    <div>(c) 2010 Ondra.Zizka.cz</div>
+</body>
+</html>
