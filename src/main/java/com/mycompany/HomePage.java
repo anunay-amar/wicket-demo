@@ -1,8 +1,18 @@
 package com.mycompany;
 
+import java.util.Arrays;
+import java.util.List;
+
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.html.WebMarkupContainer;
+import org.apache.wicket.markup.html.basic.EnclosureContainer;
+import org.apache.wicket.markup.html.form.DropDownChoice;
+import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.link.Link;
+import org.apache.wicket.model.Model;
+import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.WebPage;
@@ -55,5 +65,31 @@ public class HomePage extends WebPage {
 		}
 		add(webMarkupContainer);
 
+		Employee employee = new Employee();
+		employee.setFirstName("Jack");
+		employee.setLastName("Daniels");
+
+		add(new Label("withoutPropertyModel", new Model<>(employee.getFirstName())));
+		//PropertyModel would use the latest firstName of the employee
+		add(new Label("withPropertyModel", new PropertyModel<>(employee, "firstName")));
+		employee.setFirstName("Brown");
+
+		Form<Void> form = new Form<>("form");
+		List<String> fruits = Arrays.asList("Apple", "Banana", "Kiwi");
+		form.add(new DropDownChoice<>("fruits", new Model<>(), fruits));
+		add(form);
+
+		Label label = new Label("ajaxExample", "Before AJAX Link clicked");
+		label.setOutputMarkupId(true);
+		add(label);
+
+		AjaxLink<Void> ajaxLink = new AjaxLink<Void>("ajaxLinkExample") {
+			@Override
+			public void onClick(AjaxRequestTarget ajaxRequestTarget) {
+				label.setDefaultModelObject("After AJAX Link clicked");
+				ajaxRequestTarget.add(label);
+			}
+		};
+		add(ajaxLink);
 	}
 }

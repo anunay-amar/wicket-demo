@@ -9,5 +9,15 @@
 		<div wicket:id="webMarkupDemo">
 			You have <span wicket:id="numberOfMessage"></span> new messages!!
 		</div>
+		<wicket:container wicket:id="withoutPropertyModel">Default Label1</wicket:container><br>
+		<wicket:container wicket:id="withPropertyModel">Default Label2</wicket:container>
+		<form wicket:id="form">
+			Select a fruit: <select wicket:id="fruits"></select>
+			<div><input type="submit" value="submit"/></div>
+		</form>
+		<wicket:enclosure child="ajaxExample">
+			<wicket:container wicket:id="ajaxExample">DEFAULT AJAX LABEL</wicket:container><br>
+			<wicket:container wicket:id="ajaxLinkExample">Click me to change above ajax label</wicket:container>
+		</wicket:enclosure>
 	</body>
 </html>
